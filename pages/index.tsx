@@ -30,19 +30,17 @@ const Home: NextPage = () => {
   const handleCountrySelect = (country: Country) => {
     setError("");
     setIsLoading(true)
-    axios.get(`https://api.api-ninjas.com/v1/country?name=${country.name.common}`, {
-      headers: {
-        'X-Api-Key': 'UqygylAdC4p5SUoTBLE/4A==IPJhXLvjexQiLbhX' // Replace with your actual API key
-      }
-    })
+    const countryCode = country.cca3;
+    axios.get(`https://api.worldbank.org/v2/country/${countryCode}/indicator/NY.GDP.PCAP.CD?format=json`)
       .then(response => {
+        const gdpData = response.data[1][1];
 
         const Data: Country = {
-          name: response.data[0].name,
+          name: country.name,
           cca3: country.cca3,
-          gdp: response.data[0].gdp,
+          gdp: gdpData ? gdpData.value : null,
           flags: country.flags
-        }
+        };
         setSelectedCountry(Data);
         setIsLoading(false)
 
