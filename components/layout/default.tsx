@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <main>{children}</main>
+      <main className={roboto.className}>{children}</main>
     </>
   )
 }

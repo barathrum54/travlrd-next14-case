@@ -22,6 +22,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ countries, onSelect, lo
     onSelect(country);
     setIsOpen(false);
   };
+
   const handleHeaderClick = () => {
     if (!loading) {
       setIsOpen(!isOpen);
